@@ -1,10 +1,12 @@
-package io.pactflow.example.kafka;
+package io.pactflow.example.kafka.repository;
 
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import io.pactflow.example.kafka.model.Product;
 
 @Configuration
 @Slf4j

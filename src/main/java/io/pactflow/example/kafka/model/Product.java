@@ -1,21 +1,20 @@
-package io.pactflow.example.kafka;
+package io.pactflow.example.kafka.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Data
 @Entity
-class Product {
+public class Product {
   private @Id String id;
   private String name;
   private String type;
   private String version;
   private String event;
 
-  Product() {}
-  Product(String id, String name, String type, String version, String event) {
+  public Product() {}
+  public Product(String id, String name, String type, String version, String event) {
     this.id = id;
     this.name = name;
     this.type = type;

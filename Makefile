@@ -26,6 +26,8 @@ fake_ci: .env
 	CI=true \
 	GIT_COMMIT=`git rev-parse --short HEAD`+`date +%s` \
 	GIT_BRANCH=`git rev-parse --abbrev-ref HEAD` \
+	PACT_BROKER_BASE_URL=https://praveenem.pactflow.io \
+	PACT_BROKER_TOKEN=sM59vhvwEHC0JfOGQu3MIA \
 	make ci
 
 
@@ -125,6 +127,6 @@ start: docker
 	./gradlew bootRun
 
 test-events:
-	docker exec -it pactflow-example-consumer-java-kafka_kafka_1 /tmp/scripts/producer.sh
+	docker exec -it example-consumer-java-kafka_kafka_1 /tmp/scripts/producer.sh
 
 .PHONY: test start docker docker-stop docker-rm docker-logs

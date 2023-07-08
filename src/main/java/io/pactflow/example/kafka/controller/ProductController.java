@@ -1,10 +1,14 @@
-package io.pactflow.example.kafka;
+package io.pactflow.example.kafka.controller;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.pactflow.example.kafka.model.Product;
+import io.pactflow.example.kafka.repository.ProductRepository;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController

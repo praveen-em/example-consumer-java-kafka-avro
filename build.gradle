@@ -1,39 +1,66 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.2.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
-  id "au.com.dius.pact" version "4.1.0"
+	id "org.springframework.boot" version "3.1.1"
+	id 'io.spring.dependency-management' version '1.1.0'
+//    id "au.com.dius.pact" version "4.6.1"
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
+	maven {
+		url "https://packages.confluent.io/maven"
+	}	
 }
 
 configurations {
-  compileOnly {
-    extendsFrom annotationProcessor
-  }
+	compileOnly {
+    	extendsFrom annotationProcessor
+  	}
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.kafka:spring-kafka'
-	testCompile 'au.com.dius:pact-jvm-consumer-junit5:4.0.10'
-	testCompile 'au.com.dius:pact-jvm-provider-spring:4.0.10'
+	// testCompile 'au.com.dius:pact-jvm-provider-spring:4.5.2'
+
+	// https://mvnrepository.com/artifact/au.com.dius.pact.consumer/junit5
+	testImplementation 'au.com.dius.pact.consumer:junit5:4.6.1'
+
 
 	runtimeOnly 'com.h2database:h2'
-  compileOnly 'org.projectlombok:lombok'
-  annotationProcessor 'org.projectlombok:lombok'
+  	// compileOnly 'org.projectlombok:lombok'
+  	// annotationProcessor 'org.projectlombok:lombok'
+
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	compileOnly 'org.projectlombok:lombok:1.18.28'
+	annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+//		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+
+	// https://mvnrepository.com/artifact/org.apache.avro/avro
+	implementation 'org.apache.avro:avro:1.11.1'
+
+	// https://mvnrepository.com/artifact/io.confluent/kafka-avro-serializer
+	implementation 'io.confluent:kafka-avro-serializer:7.3.3'
+
+
+	// https://mvnrepository.com/artifact/io.confluent/kafka-json-schema-serializer
+	implementation 'io.confluent:kafka-json-schema-serializer:7.3.3'
 }
 
 test {
 	useJUnitPlatform()
+	systemProperty('pact_do_not_track', true);
 }

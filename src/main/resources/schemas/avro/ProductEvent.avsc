@@ -1,0 +1,33 @@
+{
+    "type": "record",
+    "name": "ProductEventAvro",
+    "namespace": "io.pactflow.example.kafka.model.generated",
+    "fields": [
+        {
+            "name": "id",
+            "type": "string"
+        },
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "type",
+            "type": "string"
+        },
+        {
+            "name": "version",
+            "type": "string",
+            "default": ""
+        },
+        {
+            "name": "event",
+            "type": {
+                "name": "EventType",
+                "type": "enum",
+                "symbols": ["CREATED","UPDATED","DELETED", "UNKNOWN"]
+            },
+            "default": "UNKNOWN"
+        }
+    ]
+}
