@@ -11,7 +11,7 @@ import au.com.dius.pact.core.model.V4Interaction;
 import au.com.dius.pact.core.model.V4Pact;
 import au.com.dius.pact.core.model.annotations.Pact;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.pactflow.example.kafka.model.generated.ProductEventAvro;
+import io.pactflow.example.kafka.model.generated.ProductEvent;
 import io.pactflow.example.kafka.service.MessageProcessor;
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaNormalization;
@@ -62,7 +62,7 @@ public class ProductsPactAvroConsumerTest {
 //      Map<String, Object> messageBody = Map.of(
 //              "message.contents",
 //              Map.ofEntries(
-//                      Map.entry("pact:schema", ProductEventAvro.SCHEMA$.toString()),
+//                      Map.entry("pact:schema", ProductEvent.SCHEMA$.toString()),
 //                      Map.entry("pact:record-name", "Order"),
 //                      Map.entry("pact:content-type", "application/avro"),
 //                      Map.entry("id", "notEmpty('100')"),
@@ -89,8 +89,8 @@ public class ProductsPactAvroConsumerTest {
 
     Map<String, Object> messageBody = Map.of(
                                     "message.contents", Map.of(
-                                      "pact:schema", ProductEventAvro.SCHEMA$.toString(),
-                                      "pact:record-name", "ProductEventAvro",
+                                      "pact:schema", ProductEvent.SCHEMA$.toString(),
+                                      "pact:record-name", "ProductEvent",
                                       "pact:content-type", "application/avro",
                                       "name", "notEmpty('product name')",
 //                                      "type", "matching(type, 'product series')",
@@ -104,8 +104,8 @@ public class ProductsPactAvroConsumerTest {
 
 //      Map<String, Object> messageBody = Map.of(
 //              "message.contents", Map.of(
-//                      "pact:avro", filePath("src/main/resources/schemas/avro/ProductEvent.avsc"),
-//                      "pact:record-name", "ProductEventAvro",
+//                      "pact:avro", filePath("src/main/resources/schemas/avro/ProductEventOld.avsc"),
+//                      "pact:record-name", "ProductEvent",
 //                      "pact:content-type", "application/avro",
 //                      "name", "matching(type, 'product name')",
 //                      "type", "matching(date, 'yyyy-MM-dd', '22:04')",
@@ -128,14 +128,14 @@ public class ProductsPactAvroConsumerTest {
 
      // convert JSON payload from pact file into Avro record.
 //      ObjectMapper objectMapper = new ObjectMapper();
-//      ProductEventAvro eventAvro;
-//      eventAvro = objectMapper.readValue(message.getContents().getContents().valueAsString(), ProductEventAvro.class);
+//      ProductEvent eventAvro;
+//      eventAvro = objectMapper.readValue(message.getContents().getContents().valueAsString(), ProductEvent.class);
 
 
     byte[] kafkaBytes = message.contentsAsBytes();
 
-//    ProductEventAvro eventAvro = ProductEventAvro.fromByteBuffer(withHeader(kafkaBytes));
-    ProductEventAvro eventAvro = decode(kafkaBytes, ProductEventAvro.class);
+//    ProductEvent eventAvro = ProductEvent.fromByteBuffer(withHeader(kafkaBytes));
+    ProductEvent eventAvro = decode(kafkaBytes, ProductEvent.class);
     System.out.println("Converted Avro Record -> " + eventAvro);
     assertDoesNotThrow(() -> {
       messageProcessor.transform(eventAvro).save();
@@ -152,7 +152,7 @@ public class ProductsPactAvroConsumerTest {
 
   public static ByteBuffer withHeader(byte[] avroBytes) throws Exception{
     byte[] V1_HEADER = new byte[] { (byte) 0xC3, (byte) 0x01 };
-    byte[] fp = SchemaNormalization.parsingFingerprint("CRC-64-AVRO", io.pactflow.example.kafka.model.generated.ProductEventAvro.SCHEMA$);
+    byte[] fp = SchemaNormalization.parsingFingerprint("CRC-64-AVRO", io.pactflow.example.kafka.model.generated.ProductEvent.SCHEMA$);
     ByteBuffer bb = ByteBuffer.allocate(avroBytes.length + V1_HEADER.length + fp.length);
     bb.put(V1_HEADER);
     bb.put(fp);

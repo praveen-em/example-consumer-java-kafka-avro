@@ -8,7 +8,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
-import io.pactflow.example.kafka.model.generated.ProductEventAvro;
+import io.pactflow.example.kafka.model.generated.ProductEvent;
 
 @EnableKafka
 @Configuration
@@ -39,14 +39,14 @@ public class KafkaConfiguration {
   }
 
   @Bean
-  public ConsumerFactory<String, ProductEventAvro> productEventAvroConsumerFactory(KafkaProperties kafkaProperties) {
+  public ConsumerFactory<String, ProductEvent> ProductEventConsumerFactory(KafkaProperties kafkaProperties) {
     return new DefaultKafkaConsumerFactory<>(kafkaProperties.buildConsumerProperties());
   }
 
   @Bean
-  public ConcurrentKafkaListenerContainerFactory<String, ProductEventAvro> kafkaListenerContainerFactory(KafkaProperties kafkaProperties) {
-    ConcurrentKafkaListenerContainerFactory<String, ProductEventAvro> factory = new ConcurrentKafkaListenerContainerFactory<String, ProductEventAvro>();
-    factory.setConsumerFactory(productEventAvroConsumerFactory(kafkaProperties));
+  public ConcurrentKafkaListenerContainerFactory<String, ProductEvent> kafkaListenerContainerFactory(KafkaProperties kafkaProperties) {
+    ConcurrentKafkaListenerContainerFactory<String, ProductEvent> factory = new ConcurrentKafkaListenerContainerFactory<String, ProductEvent>();
+    factory.setConsumerFactory(ProductEventConsumerFactory(kafkaProperties));
     return factory;
   }
 

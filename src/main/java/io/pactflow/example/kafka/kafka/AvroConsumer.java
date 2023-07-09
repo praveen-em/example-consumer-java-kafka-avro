@@ -8,7 +8,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import io.pactflow.example.kafka.Application;
-import io.pactflow.example.kafka.model.generated.ProductEventAvro;
+import io.pactflow.example.kafka.model.generated.ProductEvent;
 import io.pactflow.example.kafka.service.MessageProcessor;
 
 
@@ -19,8 +19,9 @@ public class AvroConsumer {
 	@Autowired
     private MessageProcessor messageProcessor;
 
-	@KafkaListener(topics = "products-avro", groupId = "products-avro-group", clientIdPrefix = "avro", containerFactory = "kafkaListenerContainerFactory")
-	public void listen(ConsumerRecord<String, ProductEventAvro> record) throws Exception {
+	@KafkaListener(topics = "products-avro-v2", groupId = "products-avro-group-v2", clientIdPrefix = "avro", containerFactory = "kafkaListenerContainerFactory")
+	public void listen(ConsumerRecord<String, ProductEvent> record) throws Exception {
+		logger.info("Receveid avro record: {}", record.value());
         messageProcessor.transform(record.value()).save();
 	}
 }

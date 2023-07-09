@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.pactflow.example.kafka.model.Product;
-import io.pactflow.example.kafka.model.generated.ProductEventAvro;
+import io.pactflow.example.kafka.model.generated.ProductEvent;
 import io.pactflow.example.kafka.repository.ProductRepository;
 
 @Service
@@ -21,14 +21,14 @@ public class MessageProcessor {
     @Autowired
     private ProductRepository productRepository;
 
-    public MessageProcessor transform(ProductEventAvro eventAvro) throws Exception {
+    public MessageProcessor transform(ProductEvent ProductEvent) throws Exception {
 		this.product = new Product(
-            eventAvro.getId().toString(), 
-            eventAvro.getName().toString(), 
-            eventAvro.getType().toString(), 
-            eventAvro.getVersion().toString(), 
-            eventAvro.getEvent().toString());
-		logger.info("received product event: {}", product);
+            ProductEvent.getId().toString(), 
+            ProductEvent.getName().toString(), 
+            ProductEvent.getType().toString(), 
+            ProductEvent.getVersion().toString(), 
+            ProductEvent.getEvent().toString());
+		logger.info("Domain object: {}", product);
         return this;
     }
 
