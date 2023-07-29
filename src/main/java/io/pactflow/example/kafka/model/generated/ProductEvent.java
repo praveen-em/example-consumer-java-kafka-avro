@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 8383798994315533940L;
+  private static final long serialVersionUID = 2652961257646093454L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ProductEvent\",\"namespace\":\"io.pactflow.example.kafka.model.generated\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"version\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"event\",\"type\":{\"type\":\"enum\",\"name\":\"EventType\",\"symbols\":[\"CREATED\",\"UPDATED\",\"DELETED\",\"UNKNOWN\"]},\"default\":\"UNKNOWN\"},{\"name\":\"createdOn\",\"type\":[\"null\",{\"type\":\"int\",\"logicalType\":\"date\"}],\"default\":null},{\"name\":\"price\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":6,\"scale\":2}],\"default\":null},{\"name\":\"available\",\"type\":\"boolean\",\"default\":false},{\"name\":\"location\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Address\",\"fields\":[{\"name\":\"doorNumber\",\"type\":\"int\"},{\"name\":\"street\",\"type\":\"string\"},{\"name\":\"postcode\",\"type\":\"string\"}]}],\"default\":null},{\"name\":\"relatedItems\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"string\"}],\"default\":null},{\"name\":\"otherInfo\",\"type\":[\"null\",{\"type\":\"map\",\"values\":\"string\"}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ProductEvent\",\"namespace\":\"io.pactflow.example.kafka.model.generated\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"version\",\"type\":\"string\",\"default\":\"\"},{\"name\":\"event\",\"type\":{\"type\":\"enum\",\"name\":\"EventType\",\"symbols\":[\"CREATED\",\"UPDATED\",\"DELETED\",\"UNKNOWN\"]},\"default\":\"UNKNOWN\"},{\"name\":\"createdOn\",\"type\":[\"null\",{\"type\":\"int\",\"logicalType\":\"date\"}],\"default\":null},{\"name\":\"price\",\"type\":[\"null\",{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":6,\"scale\":2}],\"default\":null},{\"name\":\"available\",\"type\":\"boolean\",\"default\":false},{\"name\":\"location\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Address\",\"fields\":[{\"name\":\"doorNumber\",\"type\":\"int\"},{\"name\":\"street\",\"type\":\"string\"},{\"name\":\"postcode\",\"type\":\"string\"}]}],\"default\":null},{\"name\":\"relatedItems\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"string\"}],\"default\":null},{\"name\":\"otherInfo\",\"type\":{\"type\":\"map\",\"values\":\"string\"},\"default\":{}},{\"name\":\"otherInfo2\",\"type\":[\"null\",{\"type\":\"map\",\"values\":\"string\"}],\"default\":null},{\"name\":\"misc\",\"type\":[\"string\",{\"type\":\"array\",\"items\":\"int\"}],\"default\":\"miscellaneous\"},{\"name\":\"misc2\",\"type\":{\"type\":\"array\",\"items\":\"int\"},\"default\":[0,0]},{\"name\":\"misc3\",\"type\":[\"int\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"subProduct\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"id\",\"type\":\"int\"}]}}],\"default\":0}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -88,6 +88,10 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
   private io.pactflow.example.kafka.model.generated.Address location;
   private java.util.List<java.lang.CharSequence> relatedItems;
   private java.util.Map<java.lang.CharSequence,java.lang.CharSequence> otherInfo;
+  private java.util.Map<java.lang.CharSequence,java.lang.CharSequence> otherInfo2;
+  private java.lang.Object misc;
+  private java.util.List<java.lang.Integer> misc2;
+  private java.lang.Object misc3;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -109,8 +113,12 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
    * @param location The new value for location
    * @param relatedItems The new value for relatedItems
    * @param otherInfo The new value for otherInfo
+   * @param otherInfo2 The new value for otherInfo2
+   * @param misc The new value for misc
+   * @param misc2 The new value for misc2
+   * @param misc3 The new value for misc3
    */
-  public ProductEvent(java.lang.CharSequence id, java.lang.CharSequence name, java.lang.CharSequence type, java.lang.CharSequence version, io.pactflow.example.kafka.model.generated.EventType event, java.time.LocalDate createdOn, java.nio.ByteBuffer price, java.lang.Boolean available, io.pactflow.example.kafka.model.generated.Address location, java.util.List<java.lang.CharSequence> relatedItems, java.util.Map<java.lang.CharSequence,java.lang.CharSequence> otherInfo) {
+  public ProductEvent(java.lang.CharSequence id, java.lang.CharSequence name, java.lang.CharSequence type, java.lang.CharSequence version, io.pactflow.example.kafka.model.generated.EventType event, java.time.LocalDate createdOn, java.nio.ByteBuffer price, java.lang.Boolean available, io.pactflow.example.kafka.model.generated.Address location, java.util.List<java.lang.CharSequence> relatedItems, java.util.Map<java.lang.CharSequence,java.lang.CharSequence> otherInfo, java.util.Map<java.lang.CharSequence,java.lang.CharSequence> otherInfo2, java.lang.Object misc, java.util.List<java.lang.Integer> misc2, java.lang.Object misc3) {
     this.id = id;
     this.name = name;
     this.type = type;
@@ -122,6 +130,10 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
     this.location = location;
     this.relatedItems = relatedItems;
     this.otherInfo = otherInfo;
+    this.otherInfo2 = otherInfo2;
+    this.misc = misc;
+    this.misc2 = misc2;
+    this.misc3 = misc3;
   }
 
   @Override
@@ -145,6 +157,10 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
     case 8: return location;
     case 9: return relatedItems;
     case 10: return otherInfo;
+    case 11: return otherInfo2;
+    case 12: return misc;
+    case 13: return misc2;
+    case 14: return misc3;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -165,6 +181,10 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
     case 8: location = (io.pactflow.example.kafka.model.generated.Address)value$; break;
     case 9: relatedItems = (java.util.List<java.lang.CharSequence>)value$; break;
     case 10: otherInfo = (java.util.Map<java.lang.CharSequence,java.lang.CharSequence>)value$; break;
+    case 11: otherInfo2 = (java.util.Map<java.lang.CharSequence,java.lang.CharSequence>)value$; break;
+    case 12: misc = value$; break;
+    case 13: misc2 = (java.util.List<java.lang.Integer>)value$; break;
+    case 14: misc3 = value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -357,6 +377,74 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
   }
 
   /**
+   * Gets the value of the 'otherInfo2' field.
+   * @return The value of the 'otherInfo2' field.
+   */
+  public java.util.Map<java.lang.CharSequence,java.lang.CharSequence> getOtherInfo2() {
+    return otherInfo2;
+  }
+
+
+  /**
+   * Sets the value of the 'otherInfo2' field.
+   * @param value the value to set.
+   */
+  public void setOtherInfo2(java.util.Map<java.lang.CharSequence,java.lang.CharSequence> value) {
+    this.otherInfo2 = value;
+  }
+
+  /**
+   * Gets the value of the 'misc' field.
+   * @return The value of the 'misc' field.
+   */
+  public java.lang.Object getMisc() {
+    return misc;
+  }
+
+
+  /**
+   * Sets the value of the 'misc' field.
+   * @param value the value to set.
+   */
+  public void setMisc(java.lang.Object value) {
+    this.misc = value;
+  }
+
+  /**
+   * Gets the value of the 'misc2' field.
+   * @return The value of the 'misc2' field.
+   */
+  public java.util.List<java.lang.Integer> getMisc2() {
+    return misc2;
+  }
+
+
+  /**
+   * Sets the value of the 'misc2' field.
+   * @param value the value to set.
+   */
+  public void setMisc2(java.util.List<java.lang.Integer> value) {
+    this.misc2 = value;
+  }
+
+  /**
+   * Gets the value of the 'misc3' field.
+   * @return The value of the 'misc3' field.
+   */
+  public java.lang.Object getMisc3() {
+    return misc3;
+  }
+
+
+  /**
+   * Sets the value of the 'misc3' field.
+   * @param value the value to set.
+   */
+  public void setMisc3(java.lang.Object value) {
+    this.misc3 = value;
+  }
+
+  /**
    * Creates a new ProductEvent RecordBuilder.
    * @return A new ProductEvent RecordBuilder
    */
@@ -409,6 +497,10 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
     private io.pactflow.example.kafka.model.generated.Address.Builder locationBuilder;
     private java.util.List<java.lang.CharSequence> relatedItems;
     private java.util.Map<java.lang.CharSequence,java.lang.CharSequence> otherInfo;
+    private java.util.Map<java.lang.CharSequence,java.lang.CharSequence> otherInfo2;
+    private java.lang.Object misc;
+    private java.util.List<java.lang.Integer> misc2;
+    private java.lang.Object misc3;
 
     /** Creates a new Builder */
     private Builder() {
@@ -468,6 +560,22 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
         this.otherInfo = data().deepCopy(fields()[10].schema(), other.otherInfo);
         fieldSetFlags()[10] = other.fieldSetFlags()[10];
       }
+      if (isValidValue(fields()[11], other.otherInfo2)) {
+        this.otherInfo2 = data().deepCopy(fields()[11].schema(), other.otherInfo2);
+        fieldSetFlags()[11] = other.fieldSetFlags()[11];
+      }
+      if (isValidValue(fields()[12], other.misc)) {
+        this.misc = data().deepCopy(fields()[12].schema(), other.misc);
+        fieldSetFlags()[12] = other.fieldSetFlags()[12];
+      }
+      if (isValidValue(fields()[13], other.misc2)) {
+        this.misc2 = data().deepCopy(fields()[13].schema(), other.misc2);
+        fieldSetFlags()[13] = other.fieldSetFlags()[13];
+      }
+      if (isValidValue(fields()[14], other.misc3)) {
+        this.misc3 = data().deepCopy(fields()[14].schema(), other.misc3);
+        fieldSetFlags()[14] = other.fieldSetFlags()[14];
+      }
     }
 
     /**
@@ -520,6 +628,22 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
       if (isValidValue(fields()[10], other.otherInfo)) {
         this.otherInfo = data().deepCopy(fields()[10].schema(), other.otherInfo);
         fieldSetFlags()[10] = true;
+      }
+      if (isValidValue(fields()[11], other.otherInfo2)) {
+        this.otherInfo2 = data().deepCopy(fields()[11].schema(), other.otherInfo2);
+        fieldSetFlags()[11] = true;
+      }
+      if (isValidValue(fields()[12], other.misc)) {
+        this.misc = data().deepCopy(fields()[12].schema(), other.misc);
+        fieldSetFlags()[12] = true;
+      }
+      if (isValidValue(fields()[13], other.misc2)) {
+        this.misc2 = data().deepCopy(fields()[13].schema(), other.misc2);
+        fieldSetFlags()[13] = true;
+      }
+      if (isValidValue(fields()[14], other.misc3)) {
+        this.misc3 = data().deepCopy(fields()[14].schema(), other.misc3);
+        fieldSetFlags()[14] = true;
       }
     }
 
@@ -998,6 +1122,166 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
       return this;
     }
 
+    /**
+      * Gets the value of the 'otherInfo2' field.
+      * @return The value.
+      */
+    public java.util.Map<java.lang.CharSequence,java.lang.CharSequence> getOtherInfo2() {
+      return otherInfo2;
+    }
+
+
+    /**
+      * Sets the value of the 'otherInfo2' field.
+      * @param value The value of 'otherInfo2'.
+      * @return This builder.
+      */
+    public io.pactflow.example.kafka.model.generated.ProductEvent.Builder setOtherInfo2(java.util.Map<java.lang.CharSequence,java.lang.CharSequence> value) {
+      validate(fields()[11], value);
+      this.otherInfo2 = value;
+      fieldSetFlags()[11] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'otherInfo2' field has been set.
+      * @return True if the 'otherInfo2' field has been set, false otherwise.
+      */
+    public boolean hasOtherInfo2() {
+      return fieldSetFlags()[11];
+    }
+
+
+    /**
+      * Clears the value of the 'otherInfo2' field.
+      * @return This builder.
+      */
+    public io.pactflow.example.kafka.model.generated.ProductEvent.Builder clearOtherInfo2() {
+      otherInfo2 = null;
+      fieldSetFlags()[11] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'misc' field.
+      * @return The value.
+      */
+    public java.lang.Object getMisc() {
+      return misc;
+    }
+
+
+    /**
+      * Sets the value of the 'misc' field.
+      * @param value The value of 'misc'.
+      * @return This builder.
+      */
+    public io.pactflow.example.kafka.model.generated.ProductEvent.Builder setMisc(java.lang.Object value) {
+      validate(fields()[12], value);
+      this.misc = value;
+      fieldSetFlags()[12] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'misc' field has been set.
+      * @return True if the 'misc' field has been set, false otherwise.
+      */
+    public boolean hasMisc() {
+      return fieldSetFlags()[12];
+    }
+
+
+    /**
+      * Clears the value of the 'misc' field.
+      * @return This builder.
+      */
+    public io.pactflow.example.kafka.model.generated.ProductEvent.Builder clearMisc() {
+      misc = null;
+      fieldSetFlags()[12] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'misc2' field.
+      * @return The value.
+      */
+    public java.util.List<java.lang.Integer> getMisc2() {
+      return misc2;
+    }
+
+
+    /**
+      * Sets the value of the 'misc2' field.
+      * @param value The value of 'misc2'.
+      * @return This builder.
+      */
+    public io.pactflow.example.kafka.model.generated.ProductEvent.Builder setMisc2(java.util.List<java.lang.Integer> value) {
+      validate(fields()[13], value);
+      this.misc2 = value;
+      fieldSetFlags()[13] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'misc2' field has been set.
+      * @return True if the 'misc2' field has been set, false otherwise.
+      */
+    public boolean hasMisc2() {
+      return fieldSetFlags()[13];
+    }
+
+
+    /**
+      * Clears the value of the 'misc2' field.
+      * @return This builder.
+      */
+    public io.pactflow.example.kafka.model.generated.ProductEvent.Builder clearMisc2() {
+      misc2 = null;
+      fieldSetFlags()[13] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'misc3' field.
+      * @return The value.
+      */
+    public java.lang.Object getMisc3() {
+      return misc3;
+    }
+
+
+    /**
+      * Sets the value of the 'misc3' field.
+      * @param value The value of 'misc3'.
+      * @return This builder.
+      */
+    public io.pactflow.example.kafka.model.generated.ProductEvent.Builder setMisc3(java.lang.Object value) {
+      validate(fields()[14], value);
+      this.misc3 = value;
+      fieldSetFlags()[14] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'misc3' field has been set.
+      * @return True if the 'misc3' field has been set, false otherwise.
+      */
+    public boolean hasMisc3() {
+      return fieldSetFlags()[14];
+    }
+
+
+    /**
+      * Clears the value of the 'misc3' field.
+      * @return This builder.
+      */
+    public io.pactflow.example.kafka.model.generated.ProductEvent.Builder clearMisc3() {
+      misc3 = null;
+      fieldSetFlags()[14] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public ProductEvent build() {
@@ -1023,6 +1307,10 @@ public class ProductEvent extends org.apache.avro.specific.SpecificRecordBase im
         }
         record.relatedItems = fieldSetFlags()[9] ? this.relatedItems : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[9]);
         record.otherInfo = fieldSetFlags()[10] ? this.otherInfo : (java.util.Map<java.lang.CharSequence,java.lang.CharSequence>) defaultValue(fields()[10]);
+        record.otherInfo2 = fieldSetFlags()[11] ? this.otherInfo2 : (java.util.Map<java.lang.CharSequence,java.lang.CharSequence>) defaultValue(fields()[11]);
+        record.misc = fieldSetFlags()[12] ? this.misc :  defaultValue(fields()[12]);
+        record.misc2 = fieldSetFlags()[13] ? this.misc2 : (java.util.List<java.lang.Integer>) defaultValue(fields()[13]);
+        record.misc3 = fieldSetFlags()[14] ? this.misc3 :  defaultValue(fields()[14]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

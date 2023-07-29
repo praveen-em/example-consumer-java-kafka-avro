@@ -59,47 +59,78 @@ public class ProductsPactAvroConsumerTest {
 
     V4Pact createPact(PactBuilder builder) {
 
-//      Map<String, Object> messageBody = Map.of(
-//              "message.contents",
-//              Map.ofEntries(
-//                      Map.entry("pact:schema", ProductEvent.SCHEMA$.toString()),
-//                      Map.entry("pact:record-name", "Order"),
-//                      Map.entry("pact:content-type", "application/avro"),
-//                      Map.entry("id", "notEmpty('100')"),
-//                      Map.entry("names", "notEmpty('name-1')"),
-//                      Map.entry("enabled", "matching(boolean, true)"),
-//                      Map.entry("height", "matching(decimal, 15.8)"),
-//                      Map.entry("width", "matching(decimal, 1.8)"),
-//                      Map.entry("status", "matching(equalTo, 'CREATED')"),
-//                      Map.entry(
-//                              "address",
-//                              Map.of(
-//                                      "no", "matching(integer, 121)",
-//                                      "street", "matching(equalTo, 'street name')")),
-//                      Map.entry(
-//                              "items",
-//                              List.of(
-//                                      Map.of(
-//                                              "name", "notEmpty('Item-1')",
-//                                              "id", "notEmpty('1')"),
-//                                      Map.of(
-//                                              "name", "notEmpty('Item-2')",
-//                                              "id", "notEmpty('2')"))),
-//                      Map.entry("userId", "notEmpty('20bef962-8cbd-4b8c-8337-97ae385ac45d')")));
-
     Map<String, Object> messageBody = Map.of(
-                                    "message.contents", Map.of(
-                                      "pact:schema", ProductEvent.SCHEMA$.toString(),
-                                      "pact:record-name", "ProductEvent",
-                                      "pact:content-type", "application/avro",
-                                      "name", "notEmpty('product name')",
-//                                      "type", "matching(type, 'product series')",
-                                          "type", "notEmpty('product series')",
-//                                      "type", "matching(date, 'yyyy-MM-dd', '22:04')",
-                                      "id", "matching(type, '5cc989d0-d800-434c-b4bb-b1268499e850')",
-                                      "version", "matching(regex, 'v[a-zA-z0-9]+', 'v1')",
-                                      "event", "matching(regex, '^(CREATED|UPDATED|DELETED)$', 'CREATED')"
-                                    ));
+            "message.contents", Map.ofEntries(
+                    Map.entry("pact:schema", ProductEvent.SCHEMA$.toString()),
+                    Map.entry("pact:record-name", "ProductEvent"),
+                    Map.entry("pact:content-type", "application/avro"),
+                    Map.entry("name", "notEmpty('product name')"),
+                    Map.entry("type", "notEmpty('product series')"),
+                    Map.entry("id", "matching(type, '5cc989d0-d800-434c-b4bb-b1268499e850')"),
+                    Map.entry("version", "matching(regex, 'v[a-zA-z0-9]+', 'v1')"),
+                    Map.entry("event", "matching(regex, '^(CREATED|UPDATED|DELETED)$', 'CREATED')"),
+                    Map.entry("createdOn", "matching(date, '2006-01-02', '2023-07-08')"),
+                    Map.entry("available", "matching(boolean, true)"),
+                    Map.entry("location", Map.of(
+                                    "doorNumber", "matching(integer, 29)",
+                                    "street", "notEmpty('cross street')",
+                                    "postcode", "notEmpty('GU15 7SR')"
+                                    )
+                    ),
+                    Map.entry("otherInfo", Map.of(
+                            "key1", "matching(type, 'value1')",
+                            "key2", "notEmpty('value2')"
+                            )
+                    ),
+                    Map.entry("otherInfo2",
+                            Map.of(
+                                    "pact:match", "eachKey(matching(type, 'key1')), eachValue(notEmpty('value11'))"
+                            )
+//                            Map.of(
+//                                    "key1", "matching(equalTo, 'value11')",
+//                                    "key2", "notEmpty('value12')"
+//                            )
+                    ),
+                    Map.entry("relatedItems", List.of(
+                            "matching(type, 'item1')",
+                            "matching(type, 'item2')",
+                            "matching(type, 'item3')"
+                    )),
+                    Map.entry("misc", List.of(
+                            "matching(type,10)",
+                            "matching(type,11)",
+                            "matching(type, 12)"
+                    )),
+                    Map.entry("misc2", Map.of(
+                            "pact:match", "eachValue(matching(type, 100))")
+                    ),
+//                            List.of(
+//                            "matching(equalTo,20)",
+//                            "matching(type,21)",
+//                            "matching(number, 22)"
+//                    )),
+                    Map.entry("misc3",
+//                            Map.of(
+//                            "pact:match", "eachValue(matching($'subProducts'))",
+//                            "subProducts", List.of(
+//                                    Map.of(
+//                                    "name", "notEmpty('name1')",
+//                                    "id", "notEmpty(1)"
+//                                    ))
+//                            )
+                            List.of(
+                                Map.of(
+                                        "name", "matching(type, 'name1')",
+                                        "id", "matching(integer, 1)"
+                                ),
+                                Map.of(
+                                        "name", "matching(type, 'name2')",
+                                        "id", "matching(integer, 99999)"
+                                )
+                            )
+                    )
+            )
+    );
 
 
 //      Map<String, Object> messageBody = Map.of(
@@ -115,7 +146,7 @@ public class ProductsPactAvroConsumerTest {
 //              ));
 
     return builder
-      .usingPlugin("foobar")
+      .usingPlugin("avro")
       .expectsToReceive("a product created event", "core/interaction/message")
       .with(messageBody)
       .toPact();

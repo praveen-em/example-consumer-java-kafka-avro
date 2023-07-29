@@ -19,7 +19,7 @@ public class AvroConsumer {
 	@Autowired
     private MessageProcessor messageProcessor;
 
-	@KafkaListener(topics = "products-avro-v2", groupId = "products-avro-group-v2", clientIdPrefix = "avro", containerFactory = "kafkaListenerContainerFactory")
+	@KafkaListener(topics = "products-avro-v4", groupId = "products-avro-group-v4", clientIdPrefix = "avro", containerFactory = "kafkaListenerContainerFactory")
 	public void listen(ConsumerRecord<String, ProductEvent> record) throws Exception {
 		logger.info("Receveid avro record: {}", record.value());
         messageProcessor.transform(record.value()).save();
